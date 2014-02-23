@@ -37,11 +37,11 @@ def info(object, spacing=10, collapse=1):
 
 	Takes module, class, list, dictionary, or string."""
 	methodList = [e for e in dir(object) if callable(getattr(object, e))]
-	processFunc = collapse and (lambda s: " ".join(s.split())) or (lambda s: s)
+	processFunc = collapse and (lambda s: " ".join(s.split())) or (lambda s: s) # 4.6: a and b or c is an idiom for "a? b: c", AS LONG AS b is not False
 	print "\n".join(["%s %s" %
 					 (method.ljust(spacing),
-					  processFunc(str(getattr(object, method).__doc__)))
-					 for method in methodList])
-
+					  processFunc(str(getattr(object, method).__doc__)))        # 4.4: getattr() gets a named attributed from an object
+					 for method in methodList])                                 # the result of getattr() can be used directly!
+                                                                                # 4.8: str('') == 'None' to handle corner case of empty docstrings
 if __name__ == "__main__":
 	print help.__doc__
