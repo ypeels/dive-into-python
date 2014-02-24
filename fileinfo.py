@@ -57,7 +57,7 @@ class MP3FileInfo(FileInfo):
                 fsock.seek(-128, 2)
                 tagdata = fsock.read(128)
             finally:
-                fsock.close()
+                fsock.close()                           # 6.2: multiple calls to close() will fail silently.
             if tagdata[:3] == 'TAG':
                 for tag, (start, end, parseFunc) in self.tagDataMap.items():
                     self[tag] = parseFunc(tagdata[start:end])
@@ -74,11 +74,11 @@ def listDirectory(directory, fileExtList):
     fileList = [os.path.normcase(f) for f in os.listdir(directory)]
     fileList = [os.path.join(directory, f) for f in fileList \
                 if os.path.splitext(f)[1] in fileExtList]
-    def getFileInfoClass(filename, module=sys.modules[FileInfo.__module__]):
+    def getFileInfoClass(filename, module=sys.modules[FileInfo.__module__]):    # 6.4: scan FileInfo's module for class %sFileInfo
         "get file info class from filename extension"
-        subclass = "%sFileInfo" % os.path.splitext(filename)[1].upper()[1:]
-        return hasattr(module, subclass) and getattr(module, subclass) or FileInfo
-    return [getFileInfoClass(f)(f) for f in fileList]
+        subclass = "%sFileInfo" % os.path.splitext(filename)[1].upper()[1:]     # 6.6: "1:" slices off the dot before the extension
+        return hasattr(module, subclass) and getattr(module, subclass) or FileInfo  # 6.4: “If this module has the class named by subclass then return it, otherwise return the base class FileInfo [NOT a class instance].” 
+    return [getFileInfoClass(f)(f) for f in fileList]                           # 6.6: FileInfo.__init__() triggers subclass's __setitem__                  
 
 if __name__ == "__main__":
     for info in listDirectory("/music/_singles/", [".mp3"]):
