@@ -1,3 +1,4 @@
 Section(s)	File(s)
 2.1, 2.4, 3.x	odbchelper.py
 4.1		apihelper.py
+5.1		fileinfo.py
