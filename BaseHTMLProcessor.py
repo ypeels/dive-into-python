@@ -39,14 +39,14 @@ class BaseHTMLProcessor(SGMLParser):                                            
 		# to ensure that it will pass through this parser unaltered (in handle_comment).
 		strattrs = "".join([' %s="%s"' % (key, value) for key, value in attrs]) # takes attribute name/value pairs...
 		self.pieces.append("<%(tag)s%(strattrs)s>" % locals())                  # reconstructs original HTML, and appends to pieces
-		
+                                                                                # 8.7: (nice) side effect is adding quotes to unquoted attribute values
 	def unknown_endtag(self, tag):
 		# called for each end tag, e.g. for </pre>, tag will be "pre"
 		# Reconstruct the original end tag.
 		self.pieces.append("</%(tag)s>" % locals())                             # 8.5: special function locals()! (also, globals())
                                                                                 # returns dictionary of all local vars + values
-	def handle_charref(self, ref):
-		# called for each character reference, e.g. for "&#160;", ref will be "160"
+	def handle_charref(self, ref):                                                  # 8.6: locals() "is the most common use of dictionary-based string formatting."
+		# called for each character reference, e.g. for "&#160;", ref will be "160"     # but locals() also copies the local namespace, so beware the performance hit
 		# Reconstruct the original character reference.
 		self.pieces.append("&#%(ref)s;" % locals())                             # just reproducing the original &#<ref#>;
 		
@@ -91,3 +91,6 @@ class BaseHTMLProcessor(SGMLParser):                                            
 if __name__ == "__main__":
 	for k, v in globals().items():                                              # 8.5: special function globals() returns 
 		print k, "=", v                                                         # a dictionary with all of this module's globals { "name": value }  
+
+                                                                                # BEWARE!!! locals() is read-only, globals() is not!!!
+                                                                                # see Example 8.12 in Section 8.5. locals() makes a copy of the local namespace...

@@ -26,9 +26,9 @@ class Dialectizer(BaseHTMLProcessor):
 	def start_pre(self, attrs):
 		# called for every <pre> tag in HTML source
 		# Increment verbatim mode count, then handle tag like normal
-		self.verbatim += 1
-		self.unknown_starttag("pre", attrs)
-
+		self.verbatim += 1                                                  # 8.8: suspend dialectization
+		self.unknown_starttag("pre", attrs)                                 # does this mishandle <pre/> tags? YES. probably also <img/> and other "self-closed" tags...
+                                                                            # a fix would involve do_pre() - see sgmllib source at end of this file
 	def end_pre(self):
 		# called for every </pre> tag in HTML source
 		# Decrement verbatim mode count
@@ -40,7 +40,7 @@ class Dialectizer(BaseHTMLProcessor):
 		# called for every block of text in HTML source
 		# If in verbatim mode, save text unaltered;
 		# otherwise process the text with a series of substitutions
-		self.pieces.append(self.verbatim and text or self.process(text))
+		self.pieces.append(self.verbatim and text or self.process(text))    # Section 8.8
 
 	def process(self, text):
 		# called from handle_data
@@ -55,7 +55,7 @@ class ChefDialectizer(Dialectizer):
 
 	based on the classic chef.x, copyright (c) 1992, 1993 John Hagerman
 	"""
-	subs = ((r'a([nu])', r'u\1'),
+	subs = ((r'a([nu])', r'u\1'),                                           # regular expressions galore. see chapter 7
 			(r'A([nu])', r'U\1'),
 			(r'a\B', r'e'),
 			(r'A\B', r'E'),
@@ -141,16 +141,16 @@ def translate(url, dialectName="chef"):
 	"""fetch URL and translate using dialect
 
 	dialect in ("chef", "fudd", "olde")"""
-	import urllib
+	import urllib                                                       # import into function's local namespace
 	sock = urllib.urlopen(url)
 	htmlSource = sock.read()
 	sock.close()
-	parserName = "%sDialectizer" % dialectName.capitalize()
-	parserClass = globals()[parserName]
-	parser = parserClass()
+	parserName = "%sDialectizer" % dialectName.capitalize()             # capitalize operates on the FIRST LETTER of a string
+	parserClass = globals()[parserName]                                 # hmm, no error-checking on parserName...
+	parser = parserClass()                                              # 8.9: foreshadows dynamic importing    
 	parser.feed(htmlSource)
-	parser.close()
-	return parser.output()
+	parser.close()                                                      # 8.9: flush SGMLParser's internal buffer
+	return parser.output()                                              # BaseHTMLProcessor.output()
 
 def test(url):
 	"""test all dialects against URL"""
@@ -165,3 +165,28 @@ def test(url):
 if __name__ == "__main__":
 	#test("http://diveintopython.org/odbchelper_list.html")
     test("http://www.diveintopython.net/native_data_types/lists.html")  # domain AND url have changed, as of 2/2014
+
+    
+# from Lib/sgmllib.py
+#   # Internal -- finish processing of start tag
+#   # Return -1 for unknown tag, 0 for open-only tag, 1 for balanced tag
+#   def finish_starttag(self, tag, attrs):
+#       try:
+#           method = getattr(self, 'start_' + tag)                      # introspection for custom tag handler start_tag()
+#       except AttributeError:                                          # searches subclasses too!
+#           try:
+#               method = getattr(self, 'do_' + tag)                     # also searches for do_tag(), usu for standalone tags
+#           except AttributeError:
+#               self.unknown_starttag(tag, attrs)
+#               return -1
+#           else:
+#               self.handle_starttag(tag, method, attrs)
+#               return 0                                                # call custom handler for <tag/>
+#       else:
+#           self.stack.append(tag)
+#           self.handle_starttag(tag, method, attrs)
+#           return 1                                                    # call custom handler for <tag>
+#
+#   # Overridable -- handle start tag                                   # COULD override, but unnecessary here
+#   def handle_starttag(self, tag, method, attrs):
+#       method(attrs)
