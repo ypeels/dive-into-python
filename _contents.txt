@@ -2,3 +2,5 @@ Section(s)	File(s)
 2.1-3.8		odbchelper.py
 4.1-4.9		apihelper.py
 5.1-6.7		fileinfo.py
+8.1-		BaseHTMLProcessor.py, dialect.py
+8.3-		urllister.py
