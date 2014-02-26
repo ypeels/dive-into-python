@@ -17,7 +17,7 @@ __copyright__ = "Copyright (c) 2001 Mark Pilgrim"
 __license__ = "Python"
 
 from sgmllib import SGMLParser                                                  # 8.2: sgmllib breaks HTML down into pieces
-import htmlentitydefs                                                           # I guess this book predates standardized DOM?
+import htmlentitydefs                                                           # why not DOM? it's mentioned in Chapter 9...
 
 class BaseHTMLProcessor(SGMLParser):                                            # 8.2: lists when fns are called
 	def reset(self):                                                                # 8.4: SGMLParser base class is just a consumer.
