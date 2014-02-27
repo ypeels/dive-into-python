@@ -8,3 +8,5 @@ Section(s)	File(s)
 10.2		chapter-9-kgp/stderr.py, stdout.py
 10.6		argecho.py
 11.1-11.9	openanything.py
+12.1-12.8	search.py
+12.2		install PyXML, fpconst, SOAPpy
