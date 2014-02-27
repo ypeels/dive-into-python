@@ -7,3 +7,4 @@ Section(s)	File(s)
 9.1-10.7	chapter-9-kgp/
 10.2		chapter-9-kgp/stderr.py, stdout.py
 10.6		argecho.py
+11.1-11.9	openanything.py
