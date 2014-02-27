@@ -54,11 +54,11 @@ class KantGenerator:
         - the actual XML document, as a string
         """
         sock = toolbox.openAnything(source)
-        xmldoc = minidom.parse(sock).documentElement
+        xmldoc = minidom.parse(sock).documentElement                            # 10.7: parse XML into a tree of Python objects    
         sock.close()
         return xmldoc
 
-    def loadGrammar(self, grammar):
+    def loadGrammar(self, grammar):                                             # Section 10.3: Caching node lookups
         """load context-free grammar"""
         self.grammar = self._load(grammar)
         self.refs = {}
@@ -69,7 +69,7 @@ class KantGenerator:
         """load source"""
         self.source = self._load(source)
 
-    def getDefaultSource(self):
+    def getDefaultSource(self):                                                 # 10.7
         """guess default source of the current grammar
         
         The default source will be one of the <ref>s that is not
@@ -109,21 +109,21 @@ class KantGenerator:
         """output generated text"""
         return "".join(self.pieces)
 
-    def randomChildElement(self, node):
+    def randomChildElement(self, node):                                         # Section 10.4: Finding direct children of a node
         """choose a random child element of a node
         
         This is a utility method used by do_xref and do_choice.
         """
         choices = [e for e in node.childNodes
-                   if e.nodeType == e.ELEMENT_NODE]
-        chosen = random.choice(choices)
+                   if e.nodeType == e.ELEMENT_NODE]                             # possible values in __init__.py of xml.dom
+        chosen = random.choice(choices)                                         # module "random" was imported at module level
         if _debug:
             sys.stderr.write('%s available choices: %s\n' % \
                 (len(choices), [e.toxml() for e in choices]))
             sys.stderr.write('Chosen: %s\n' % chosen.toxml())
         return chosen
 
-    def parse(self, node):
+    def parse(self, node):                                                      # Section 10.5: Creating separate handlers by node type. no error handling - AttributeError'll get it
         """parse a single XML node
         
         A parsed XML document (from minidom.parse) is a tree of nodes
@@ -137,7 +137,7 @@ class KantGenerator:
         parseMethod = getattr(self, "parse_%s" % node.__class__.__name__)
         parseMethod(node)
 
-    def parse_Document(self, node):
+    def parse_Document(self, node):                                             # only ever called once, for root Document element
         """parse the document node
         
         The document node by itself isn't interesting (to us), but
@@ -146,7 +146,7 @@ class KantGenerator:
         """
         self.parse(node.documentElement)
 
-    def parse_Text(self, node):
+    def parse_Text(self, node):                                                 # append, with capitalization if requested
         """parse a text node
         
         The text of a text node is usually added to the output buffer
@@ -160,7 +160,7 @@ class KantGenerator:
             self.pieces.append(text[1:])
             self.capitalizeNextWord = 0
         else:
-            self.pieces.append(text)
+            self.pieces.append(text)                                            # 10.7: end of the line! print text and return. this is the bottom of the rabbit hole
 
     def parse_Element(self, node):
         """parse an element
@@ -172,17 +172,17 @@ class KantGenerator:
         element ("do_xref" for an <xref> tag, etc.) and
         call the method.
         """
-        handlerMethod = getattr(self, "do_%s" % node.tagName)
+        handlerMethod = getattr(self, "do_%s" % node.tagName)                   # 10.5: dispatcher to do_ functions.
         handlerMethod(node)
 
-    def parse_Comment(self, node):
+    def parse_Comment(self, node):                                              # skip comments
         """parse a comment
         
         The grammar can contain XML comments, but we ignore them
         """
         pass
     
-    def do_xref(self, node):
+    def do_xref(self, node):                                                    # Section 10.3: Caching node lookups (paired with loadGrammar())
         """handle <xref id='...'> tag
         
         An <xref id='...'> tag is a cross-reference to a <ref id='...'>
@@ -226,14 +226,14 @@ class KantGenerator:
 def usage():
     print __doc__
 
-def main(argv):
+def main(argv):                                                                     # Section 10.6: Handling command-line arguments
     grammar = "kant.xml"
     try:
-        opts, args = getopt.getopt(argv, "hg:d", ["help", "grammar="])
-    except getopt.GetoptError:
-        usage()
+        opts, args = getopt.getopt(argv, "hg:d", ["help", "grammar="])              # getopt.getopt() - see http://docs.python.org/2/library/getopt.html
+    except getopt.GetoptError:                                                          # short flags MUST follow long flags, for third argument to be parsed correctly
+        usage()                                                                     # user passed some command-line flag that you don't understand
         sys.exit(2)
-    for opt, arg in opts:
+    for opt, arg in opts:                                                           # opts = list of 2-tuples (opt, arg = ''). args = non-option arguments
         if opt in ("-h", "--help"):
             usage()
             sys.exit()
@@ -248,4 +248,4 @@ def main(argv):
     print k.output()
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main(sys.argv[1:])                                                              # sys.argv[0] == name of the script that you're running

@@ -55,4 +55,4 @@ def openAnything(source):
     
     # treat source as string
     import StringIO
-    return StringIO.StringIO(str(source))
+    return StringIO.StringIO(str(source))                           # 10.1: open string as a file-like object (to symmetrize application code)
