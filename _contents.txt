@@ -12,3 +12,4 @@ Section(s)	File(s)
 12.2		install PyXML, fpconst, SOAPpy
 13.3-15.4	romantest.py
 14-1-15.4	roman/ - [Unit-]Test-Driven Development
+16.1-		regression.py; apihelpertest.py, kgptest.py, odbchelpertest.py
