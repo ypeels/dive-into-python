@@ -35,10 +35,10 @@ romanNumeralMap = (('M',  1000),
 def toRoman(n):
     """convert integer to Roman numeral"""
     result = ""
-    for numeral, integer in romanNumeralMap:
+    for numeral, integer in romanNumeralMap:        # 14.2: "rich data structure pays off" with simple logic
         while n >= integer:
             result += numeral
-            n -= integer
+            n -= integer                            # doesn't pass bad-input tests
     return result
 
 def fromRoman(s):

@@ -34,9 +34,9 @@ romanNumeralMap = (('M',  1000),
 
 def toRoman(n):
     """convert integer to Roman numeral"""
-    if not (0 < n < 4000):
+    if not (0 < n < 4000):                                              # NEW: handle 2 corner cases
         raise OutOfRangeError, "number out of range (must be 1..3999)"
-    if int(n) <> n:
+    if int(n) <> n:                                                     
         raise NotIntegerError, "non-integers can not be converted"
 
     result = ""
@@ -46,6 +46,6 @@ def toRoman(n):
             n -= integer
     return result
 
-def fromRoman(s):
-    """convert Roman numeral to integer"""
+def fromRoman(s):                                                       # 14.3: down to 6 failing tests, all involving fromRoman()
+    """convert Roman numeral to integer"""                              # "stop coding toRoman now... Back away from the keyboard."
     pass

@@ -49,8 +49,8 @@ def toRoman(n):
     return result
 
 #Define pattern to detect valid Roman numerals
-romanNumeralPattern = '^M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'
-
+romanNumeralPattern = '^M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'    # NEW in 14.5: (generalization of) regex from Section 7.3
+                                                                                    # regex is case-sensitive, so we're done!
 def fromRoman(s):
     """convert Roman numeral to integer"""
     if not re.search(romanNumeralPattern, s):
@@ -62,4 +62,4 @@ def fromRoman(s):
         while s[index:index+len(numeral)] == numeral:
             result += integer
             index += len(numeral)
-    return result
+    return result                                                                   # status: all tests pass!!

@@ -9,7 +9,7 @@ __author__ = "Mark Pilgrim (mark@diveintopython.org)"
 __version__ = "$Revision: 1.3 $"
 __date__ = "$Date: 2004/05/05 21:57:20 $"
 __copyright__ = "Copyright (c) 2001 Mark Pilgrim"
-__license__ = "Python"
+__license__ = "Python"                                                                  # the code in this file is the same as that in roman5.py
 
 import re
 
@@ -62,4 +62,4 @@ def fromRoman(s):
         while s[index:index+len(numeral)] == numeral:
             result += integer
             index += len(numeral)
-    return result
+    return result                                                                   # new test for blank numeral should fail now

@@ -4,11 +4,11 @@ Section(s)	File(s)
 5.1-6.7		fileinfo.py
 8.1-8.10	BaseHTMLProcessor.py, dialect.py
 8.3		urllister.py
-9.1-10.7	kgp/
+9.1-10.7	kgp/ - XML Processing, Scripts, and Streams
 10.2		kgp/stderr.py, stdout.py
 10.6		argecho.py
 11.1-11.9	openanything.py
 12.1-12.8	search.py
 12.2		install PyXML, fpconst, SOAPpy
-13.3-13.5	romantest.py
-14-1-15.4	roman/
+13.3-15.4	romantest.py
+14-1-15.4	roman/ - [Unit-]Test-Driven Development

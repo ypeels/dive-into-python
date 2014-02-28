@@ -12,15 +12,15 @@ __copyright__ = "Copyright (c) 2001 Mark Pilgrim"
 __license__ = "Python"
 
 #Define exceptions
-class RomanError(Exception): pass
+class RomanError(Exception): pass                                   # custom base class
 class OutOfRangeError(RomanError): pass
 class NotIntegerError(RomanError): pass
 class InvalidRomanNumeralError(RomanError): pass
 
 def toRoman(n):
     """convert integer to Roman numeral"""
-    pass
+    pass                                                            # empty stubs for now
 
 def fromRoman(s):
     """convert Roman numeral to integer"""
-    pass
+    pass                                                            # 14.1: `python romantest1.py -v` to get readable (docstring-based) ERROR/FAIL summary

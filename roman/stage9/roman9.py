@@ -18,9 +18,9 @@ class RomanError(Exception): pass
 class OutOfRangeError(RomanError): pass
 class NotIntegerError(RomanError): pass
 class InvalidRomanNumeralError(RomanError): pass
-
+                                                                                # Section 15.4
 #Roman numerals must be less than 5000
-MAX_ROMAN_NUMERAL = 4999
+MAX_ROMAN_NUMERAL = 4999                                                        # new "#define"
 
 #Define digit mapping
 romanNumeralMap = (('M',  1000),
@@ -39,8 +39,8 @@ romanNumeralMap = (('M',  1000),
 
 #Create tables for fast conversion of roman numerals.
 #See fillLookupTables() below.
-toRomanTable = [ None ]  # Skip an index since Roman numerals have no zero
-fromRomanTable = {}
+toRomanTable = [ None ]  # Skip an index since Roman numerals have no zero      # new lookup table data structures
+fromRomanTable = {}                                                             # dictionary for reverse lookup
 
 def toRoman(n):
     """convert integer to Roman numeral"""
@@ -48,17 +48,17 @@ def toRoman(n):
         raise OutOfRangeError, "number out of range (must be 1..4999)"
     if int(n) <> n:
         raise NotIntegerError, "non-integers can not be converted"
-    return toRomanTable[n]
-
+    return toRomanTable[n]                                                      # trivial logic due to pre-computed results in lookup table
+                                                                                # look ma, no regex! 
 def fromRoman(s):
     """convert Roman numeral to integer"""
     if not s:
         raise InvalidRomanNumeralError, 'Input can not be blank'
-    if not fromRomanTable.has_key(s):
+    if not fromRomanTable.has_key(s):                                           # regex validation replaced by a table check (meaning you are ASSUMING that the table is correct...)
         raise InvalidRomanNumeralError, 'Invalid Roman numeral: %s' % s
-    return fromRomanTable[s]
+    return fromRomanTable[s]                                                    # trivial logic again, due to pre-computed results in lookup table
 
-def toRomanDynamic(n):
+def toRomanDynamic(n):                                                          # NEW
     """convert integer to Roman numeral using dynamic programming"""
     assert(0 < n <= MAX_ROMAN_NUMERAL)
     assert(int(n) == n)
@@ -72,7 +72,7 @@ def toRomanDynamic(n):
         result += toRomanTable[n]
     return result
 
-def fillLookupTables():
+def fillLookupTables():                                                         # NEW
     """compute all the possible roman numerals"""
     #Save the values in two global tables to convert to and from integers.
     for integer in range(1, MAX_ROMAN_NUMERAL + 1):

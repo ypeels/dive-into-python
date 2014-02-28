@@ -73,7 +73,7 @@ class KnownValues(unittest.TestCase):
 					(3999, 'MMMCMXCIX'),
 					(4000, 'MMMM'),                                 # I thought numerals > 3999 were illegal!? (13.1)
 					(4500, 'MMMMD'),                                # hmmmmm these values are not in section 13.3...        
-					(4888, 'MMMMDCCCLXXXVIII'),
+					(4888, 'MMMMDCCCLXXXVIII'),                     # 15.2: oh, "customer requirements" changed
 					(4999, 'MMMMCMXCIX'))
 
 	def testToRomanKnownValues(self):                               # 13.4: each test is its own method, which must take no parameters and return no value
@@ -92,7 +92,7 @@ class ToRomanBadInput(unittest.TestCase):                               # 13.5: 
 	def testTooLarge(self):
 		"""toRoman should fail with large input"""
 		self.assertRaises(roman.OutOfRangeError, roman.toRoman, 5000)   # this should raise! easier than a manual try-except
-
+                                                                        # - 15.2: increased from 4000 to 5000
 	def testZero(self):
 		"""toRoman should fail with 0 input"""
 		self.assertRaises(roman.OutOfRangeError, roman.toRoman, 0)
@@ -108,7 +108,7 @@ class ToRomanBadInput(unittest.TestCase):                               # 13.5: 
 class FromRomanBadInput(unittest.TestCase):
 	def testTooManyRepeatedNumerals(self):
 		"""fromRoman should fail with too many repeated numerals"""
-		for s in ('MMMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):
+		for s in ('MMMMM', 'DD', 'CCCC', 'LL', 'XXXX', 'VV', 'IIII'):               # 15.2: changed from 'MMMM' to 'MMMMM" to reflect new customer requirements
 			self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)   # 13.5: custom exception 3 of 3
 
 	def testRepeatedPairs(self):
@@ -122,14 +122,14 @@ class FromRomanBadInput(unittest.TestCase):
 				  'MCMC', 'XCX', 'IVI', 'LM', 'LD', 'LC'):
 			self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, s)
 
-	def testBlank(self):
+	def testBlank(self):                                            # 15.1: Handling bugs        
 		"""fromRoman should fail with blank string"""
 		self.assertRaises(roman.InvalidRomanNumeralError, roman.fromRoman, "")
 
 class SanityCheck(unittest.TestCase):                               # 13.6: Testing for sanity            
 	def testSanity(self):
 		"""fromRoman(toRoman(n))==n for all n"""
-		for integer in range(1, 5000):
+		for integer in range(1, 5000):                              # 15.2: upper limit increased from 4000 to 5000 to reflect new customer requirements    
 			numeral = roman.toRoman(integer)
 			result = roman.fromRoman(numeral)
 			self.assertEqual(integer, result)
@@ -151,4 +151,5 @@ class CaseCheck(unittest.TestCase):
 							  roman.fromRoman, numeral.lower())
 
 if __name__ == "__main__":
-	unittest.main()
+	unittest.main()                                                 # 14.1: runs each method in each class defined in romantest.py
+                                                                    # failure = failed assertion; error = "unexpected" exception

@@ -50,7 +50,7 @@ def toRoman(n):
 
 #Define pattern to detect valid Roman numerals
 romanNumeralPattern = \
-    re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
+    re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')      # NEW: {m, n} syntax
 
 def fromRoman(s):
     """convert Roman numeral to integer"""

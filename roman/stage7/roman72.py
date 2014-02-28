@@ -36,7 +36,7 @@ romanNumeralMap = (('M',  1000),
 
 def toRoman(n):
     """convert integer to Roman numeral"""
-    if not (0 < n < 5000):
+    if not (0 < n < 5000):                                                              # increased upper bound
         raise OutOfRangeError, "number out of range (must be 1..4999)"
     if int(n) <> n:
         raise NotIntegerError, "non-integers can not be converted"
@@ -49,7 +49,7 @@ def toRoman(n):
     return result
 
 #Define pattern to detect valid Roman numerals
-romanNumeralPattern = '^M?M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'
+romanNumeralPattern = '^M?M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'      # added another leading 'M'
 
 def fromRoman(s):
     """convert Roman numeral to integer"""
@@ -64,4 +64,4 @@ def fromRoman(s):
         while s[index:index+len(numeral)] == numeral:
             result += integer
             index += len(numeral)
-    return result
+    return result                                                                       # that's IT! all tests pass now.

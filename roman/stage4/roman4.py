@@ -46,12 +46,12 @@ def toRoman(n):
             n -= integer
     return result
 
-def fromRoman(s):
+def fromRoman(s):                                                       # NEW in 14.4
     """convert Roman numeral to integer"""
     result = 0
     index = 0
-    for numeral, integer in romanNumeralMap:
+    for numeral, integer in romanNumeralMap:                            # same basic loop as toRoman()
         while s[index:index+len(numeral)] == numeral:
             result += integer
             index += len(numeral)
-    return result
+    return result                                                       # status: only 4 tests fail - formatting and corner cases

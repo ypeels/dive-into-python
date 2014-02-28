@@ -49,7 +49,7 @@ def toRoman(n):
     return result
 
 #Define pattern to detect valid Roman numerals
-romanNumeralPattern = re.compile('''
+romanNumeralPattern = re.compile('''                                        # NEW: verbose regex for legibility
     ^                   # beginning of string
     M{0,4}              # thousands - 0 to 4 M's
     (CM|CD|D?C{0,3})    # hundreds - 900 (CM), 400 (CD), 0-300 (0 to 3 C's),

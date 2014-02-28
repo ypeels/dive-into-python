@@ -5,7 +5,7 @@ experienced programmers.  Visit http://diveintopython.org/ for the
 latest version.
 """
 
-__author__ = "Mark Pilgrim (mark@diveintopython.org)"
+__author__ = "Mark Pilgrim (mark@diveintopython.org)"                       # the code here should be the same as roman62.py (but i didn't check)
 __version__ = "$Revision: 1.3 $"
 __date__ = "$Date: 2004/05/05 21:57:20 $"
 __copyright__ = "Copyright (c) 2001 Mark Pilgrim"
@@ -65,3 +65,9 @@ def fromRoman(s):
             result += integer
             index += len(numeral)
     return result
+    
+# newly modified tests fail!
+# - uppercase input fails because our regex only covers up to MMM
+# - fromRoman() known value test fails at MMMM, also because regex truncates at MMM
+# - toRoman() known value test fails at MMMM, due to outdated bounds checking
+# - sanity check fails for all these reasons

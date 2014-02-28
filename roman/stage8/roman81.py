@@ -50,13 +50,13 @@ def toRoman(n):
 
 #Define pattern to detect valid Roman numerals
 romanNumeralPattern = \
-    re.compile('^M?M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$')
+    re.compile('^M?M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$')    # NEW: compile the (slow) regex
 
 def fromRoman(s):
     """convert Roman numeral to integer"""
     if not s:
         raise InvalidRomanNumeralError, 'Input can not be blank'
-    if not romanNumeralPattern.search(s):
+    if not romanNumeralPattern.search(s):                                       # "much, much faster" than re.search()
         raise InvalidRomanNumeralError, 'Invalid Roman numeral: %s' % s
 
     result = 0

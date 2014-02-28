@@ -54,7 +54,7 @@ romanNumeralPattern = '^M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$'
 def fromRoman(s):
     """convert Roman numeral to integer"""
     if not s:
-        raise InvalidRomanNumeralError, 'Input can not be blank'
+        raise InvalidRomanNumeralError, 'Input can not be blank'                # NEW test.
     if not re.search(romanNumeralPattern, s):
         raise InvalidRomanNumeralError, 'Invalid Roman numeral: %s' % s
 
