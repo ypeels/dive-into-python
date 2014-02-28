@@ -19,7 +19,7 @@ import re
 
 def plural(noun):
     if re.search('[sxz]$', noun):
-        return re.sub('$', 'es', noun)
+        return re.sub('$', 'es', noun)                  # 17.2: could use string concatenation, but use regex for consistency and later refactoring
     elif re.search('[^aeioudgkprt]h$', noun):
         return re.sub('$', 'es', noun)
     elif re.search('[^aeiou]y$', noun):

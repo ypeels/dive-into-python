@@ -17,8 +17,8 @@ __license__ = "Python"
 
 import re
 
-def buildMatchAndApplyFunctions((pattern, search, replace)):
-    matchFunction = lambda word: re.search(pattern, word)
+def buildMatchAndApplyFunctions((pattern, search, replace)):        # 17.5: builds other functions dynamically. note tuple argument
+    matchFunction = lambda word: re.search(pattern, word)           # factored out common function calls
     applyFunction = lambda word: re.sub(search, replace, word)
     return (matchFunction, applyFunction)
 
@@ -29,9 +29,31 @@ patterns = \
     ('(qu|[^aeiou])y$', 'y$', 'ies'),
     ('$', '$', 's')
   )
-rules = map(buildMatchAndApplyFunctions, patterns)
+rules = map(buildMatchAndApplyFunctions, patterns)                  # "rules = buildMatchAndApplyFunctions(patterns)"
+# Example 17.11. Unrolling the rules definition
+# 
+# rules = \
+#   (
+#     (
+#      lambda word: re.search('[sxz]$', word),
+#      lambda word: re.sub('$', 'es', word)
+#     ),
+#     (
+#      lambda word: re.search('[^aeioudgkprt]h$', word),
+#      lambda word: re.sub('$', 'es', word)
+#     ),
+#     (
+#      lambda word: re.search('[^aeiou]y$', word),
+#      lambda word: re.sub('y$', 'ies', word)
+#     ),
+#     (
+#      lambda word: re.search('$', word),
+#      lambda word: re.sub('$', 's', word)
+#     )
+#    )                                          
 
-def plural(noun):
+
+def plural(noun):                                                   # still unchanged from plural2.py
     for matchesRule, applyRule in rules:
         if matchesRule(noun):
             return applyRule(noun)

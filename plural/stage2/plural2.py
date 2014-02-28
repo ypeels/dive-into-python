@@ -41,7 +41,7 @@ def match_default(moun):
 def apply_default(noun):
     return noun + 's'
 
-rules = ((match_sxz, apply_sxz),
+rules = ((match_sxz, apply_sxz),                    # lookup table for rules (not a dictionary [which is unordered], because rules have an order of precedence)
          (match_h, apply_h),
          (match_y, apply_y),
          (match_default, apply_default)
@@ -51,6 +51,17 @@ def plural(noun):
     for matchesRule, applyRule in rules:
         if matchesRule(noun):
             return applyRule(noun)
+            
+# 17.3: "unrolling the function"
+# def plural(noun):
+#     if match_sxz(noun):
+#         return apply_sxz(noun)
+#     if match_h(noun):
+#         return apply_h(noun)
+#     if match_y(noun):
+#         return apply_y(noun)
+#     if match_default(noun):
+#         return apply_default(noun)
 
 if __name__ == '__main__':
     import sys

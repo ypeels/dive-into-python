@@ -32,7 +32,7 @@ class KnownValues(unittest.TestCase):
              'cough': 'coughs',
              'utility': 'utilities',
              'vacancy': 'vacancies',
-             'soliloquy': 'soliloquies',
+             'soliloquy': 'soliloquies',                    # tons more data over pluraltest1.py (irregular nouns)
              'boy': 'boys',
              'day': 'days',
              'computer': 'computers',

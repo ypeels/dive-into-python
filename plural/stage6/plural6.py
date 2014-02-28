@@ -17,7 +17,7 @@ __license__ = "Python"
 
 import re
 
-def rules(language):
+def rules(language):                                # Section 17.7
     for line in file('rules.%s' % language):
         pattern, search, replace = line.split()
         yield lambda word: re.search(pattern, word) and re.sub(search, replace, word)

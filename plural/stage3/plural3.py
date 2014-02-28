@@ -20,7 +20,7 @@ import re
 rules = \
   (
     (
-     lambda word: re.search('[sxz]$', word),
+     lambda word: re.search('[sxz]$', word),                    # 17.4: rules are "inlined" into table
      lambda word: re.sub('$', 'es', word)
      ),
     (

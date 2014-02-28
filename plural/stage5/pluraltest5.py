@@ -11,7 +11,7 @@ __date__ = "$Date: 2004/03/17 14:35:42 $"
 __copyright__ = "Copyright (c) 2004 Mark Pilgrim"
 __license__ = "Python"
 
-from plural5 import plural
+from plural5 import plural                                      # same code as in pluraltest1.py
 import unittest, new
 
 class KnownValues(unittest.TestCase):

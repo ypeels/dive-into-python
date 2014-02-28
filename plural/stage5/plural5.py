@@ -19,14 +19,14 @@ import re
 import string
 
 def buildRule((pattern, search, replace)):
-    return lambda word: re.search(pattern, word) and re.sub(search, replace, word)
-
+    return lambda word: re.search(pattern, word) and re.sub(search, replace, word)      # combined into 1 function: see 17.7?
+                                                                                        # returns a function foo(word) that will execute the lambda when called
 def plural(noun, language='en'): 
-    lines = file('rules.%s' % language).readlines()
-    patterns = map(string.split, lines)
+    lines = file('rules.%s' % language).readlines()                                     # rules offloaded into external data file now
+    patterns = map(string.split, lines)                                                 # 17.6: "left as an exercise" to cache the rule file
     rules = map(buildRule, patterns)
     for rule in rules:
-        result = rule(noun)
+        result = rule(noun)                                                             # single call, not if(match): apply
         if result: return result
 
 if __name__ == '__main__':
