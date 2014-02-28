@@ -10,3 +10,4 @@ Section(s)	File(s)
 11.1-11.9	openanything.py
 12.1-12.8	search.py
 12.2		install PyXML, fpconst, SOAPpy
+13.3		romantest.py
