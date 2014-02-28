@@ -20,15 +20,15 @@ __license__ = "Python"
 import sys, os, re, unittest
 
 def regressionTest():
-    path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    files = os.listdir(path)
-    test = re.compile("test\.py$", re.IGNORECASE)
-    files = filter(test.search, files)
-    filenameToModuleName = lambda f: os.path.splitext(f)[0]
-    moduleNames = map(filenameToModuleName, files)
-    modules = map(__import__, moduleNames)
-    load = unittest.defaultTestLoader.loadTestsFromModule
+    path = os.path.abspath(os.path.dirname(sys.argv[0]))        # 16.2: full absolute path of regression.py's directory
+    files = os.listdir(path)                                    # 16.3: "ls $path"
+    test = re.compile("test\.py$", re.IGNORECASE)               # what's with the backslash??
+    files = filter(test.search, files)                          # 16.3: filter for all files ending in "test.py". historical note: map()/filter() predate list comprehensions (introduced in Python 2.0)
+    filenameToModuleName = lambda f: os.path.splitext(f)[0]     # 16.4: splitext() = (name, extension)
+    moduleNames = map(filenameToModuleName, files)              # - apply splitext()[0] to all filtered files
+    modules = map(__import__, moduleNames)                      # 16.6: dynamic imports!
+    load = unittest.defaultTestLoader.loadTestsFromModule       # 16.7: introspect to determine classes/functions
     return unittest.TestSuite(map(load, modules))
 
 if __name__ == "__main__":
-    unittest.main(defaultTest="regressionTest")
+    unittest.main(defaultTest="regressionTest")                 # overrides unittest's usual magic
