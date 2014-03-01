@@ -30,7 +30,7 @@ def soundex(source):
     # 2. translate all other characters to Soundex digits
     digits = list(source[0].upper() + source[1:].translate(charToSoundex))
 
-    # 3. remove consecutive duplicates
+    # 3. remove consecutive duplicates                                      # 18.5: list-based solution is the slowest method yet!?
     i=0
     for item in digits:
         if item==digits[i]: continue

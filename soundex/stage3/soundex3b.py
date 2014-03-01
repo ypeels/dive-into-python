@@ -30,7 +30,7 @@ def soundex(source):
     # 2. translate all other characters to Soundex digits
     digits = source[0].upper() + source[1:].translate(charToSoundex)
 
-    # 3. remove consecutive duplicates
+    # 3. remove consecutive duplicates                                      # 18.5: listcomp is NOT faster than direct string handling
     digits2 = "".join([digits[i] for i in range(len(digits))
                        if i == 0 or digits[i-1] != digits[i]])
         

@@ -53,7 +53,7 @@ def soundex(source):
     # 1. make first character uppercase
     # 2. translate all other characters to Soundex digits
     source = source.upper()
-    digits = source[0] + "".join([charToSoundex[c] for c in source[1:]])
+    digits = source[0] + "".join([charToSoundex[c] for c in source[1:]])    # 18.4: listcomp is faster than lambda but still slower than original letter-wise approach!
 
     # 3. remove consecutive duplicates
     digits2 = re.sub('9', '', digits)

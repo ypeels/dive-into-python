@@ -46,7 +46,7 @@ def soundex(source):
     # Soundex requirements:
     # source string must be at least 1 character
     # and must consist entirely of letters
-    if (not source) or (not source.isalpha()):
+    if (not source) or (not source.isalpha()):              # 18.3: obscure string method
         return "0000"
 
     # Soundex algorithm:

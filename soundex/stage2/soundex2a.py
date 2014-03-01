@@ -53,7 +53,7 @@ def soundex(source):
     # 1. make first character uppercase
     # 2. translate all other characters to Soundex digits
     source = source.upper()
-    digits = source[0] + "".join(map(lambda c: charToSoundex[c], source[1:]))
+    digits = source[0] + "".join(map(lambda c: charToSoundex[c], source[1:]))   # 18.4: NOT faster than letter-wise dict lookup! due to "overhead of the anonymous lambda function"
 
     # 3. remove consecutive duplicates
     digits2 = digits[0]

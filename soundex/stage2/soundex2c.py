@@ -14,7 +14,7 @@ __license__ = "Python"
 import string, re
 
 allChar = string.uppercase + string.lowercase
-charToSoundex = string.maketrans(allChar, "91239129922455912623919292" * 2)
+charToSoundex = string.maketrans(allChar, "91239129922455912623919292" * 2)     # 18.4: You're not going to get much better than that. Python has a specialized function that does exactly what you want to do; use it and move on. 
 
 def soundex(source):
     "convert string to Soundex equivalent"
@@ -30,7 +30,7 @@ def soundex(source):
     # 2. translate all other characters to Soundex digits
     digits = source[0].upper() + source[1:].translate(charToSoundex)
 
-    # 3. remove consecutive duplicates
+    # 3. remove consecutive duplicates                                          # 18.5: unchanged from original. "Sometimes it doesn't pay to be clever."
     digits2 = digits[0]
     for d in digits[1:]:
         if digits2[-1] != d:

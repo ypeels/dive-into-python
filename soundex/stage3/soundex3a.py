@@ -36,7 +36,7 @@ def soundex(source):
     for d in digits:
         if d != last_digit:
             digits2 += d
-        last_digit = d
+        last_digit = d                                              # 18.5: caching previous digit is NOT faster ("list indexes in Python are extremely efficient")
         
     # 4. remove all "9"s
     digits3 = re.sub('9', '', digits2)

@@ -39,7 +39,7 @@ charToSoundex = {"A": "9",
                  "X": "2",
                  "Y": "9",
                  "Z": "2"}
-isOnlyChars = re.compile('^[A-Za-z]+$').search
+isOnlyChars = re.compile('^[A-Za-z]+$').search                  # 18.3: using a compiled regex is significantly faster
 
 def soundex(source):
     "convert string to Soundex equivalent"

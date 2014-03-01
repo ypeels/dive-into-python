@@ -30,7 +30,7 @@ def soundex(source):
     # 2. translate all other characters to Soundex digits
     digits = source[0].upper() + source[1:].translate(charToSoundex)
 
-    # 3. remove consecutive duplicates
+    # 3. remove consecutive duplicates                                      # 18.5:  The fastest code we've seen so far was the original, most straightforward method (soundex2c.py). Sometimes it doesn't pay to be clever. 
     digits2 = digits[0]
     for d in digits[1:]:
         if digits2[-1] != d:

@@ -1,7 +1,8 @@
 Section(s)	File(s)
 2.1-3.8		odbchelper.py
 4.1-4.9		apihelper.py
-5.1-6.7		fileinfo.py
+5.1-6.7		fileinfo.py; see also fileinfo_fromdict.py?
+7.6		parsephone.py (Example 7.16?)
 8.1-8.10	BaseHTMLProcessor.py, dialect.py
 8.3		urllister.py
 9.1-10.7	kgp/ - XML Processing, Scripts, and Streams
@@ -16,3 +17,19 @@ Section(s)	File(s)
 16.2		fullpath.py
 17.2-17.7	plural/; plural.py, pluraltest.py, plural-rules.en
 17.7		fibonacci.py
+18.1-		soundex/; soundex.py, soundextest.py
+18.3		soundex/stage1
+18.4		soundex/stage2
+18.5		soundex/stage3
+18.6		soundex/stage4
+
+NIB
+piglatin.py (mentioned in frontmatter as belonging to regex chapter?)
+statsout.py (empty stub?)
+scripts used to build the book itself
+- autosize.py
+- builddialectexamples.py
+- colorize.py
+- makerealworddoc.py
+- pyfontify.py
+- unicode2koi8r.py

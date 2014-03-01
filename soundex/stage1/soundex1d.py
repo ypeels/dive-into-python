@@ -48,9 +48,9 @@ def soundex(source):
     # and must consist entirely of letters
     if not source:
         return "0000"
-    for c in source:
-        if not ('A' <= c <= 'Z') and not ('a' <= c <= 'z'):
-            return "0000"
+    for c in source:                                            # 18.3: uncompiled regex is slower than this, which is slower than a compiled regex
+        if not ('A' <= c <= 'Z') and not ('a' <= c <= 'z'):          # this is because this loop is still INTERPRETED
+            return "0000"                                            # "Regular expressions are never the right answer... except when they are."
 
     # Soundex algorithm:
     # 1. make first character uppercase
