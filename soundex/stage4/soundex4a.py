@@ -36,7 +36,7 @@ def soundex(source):
         if digits2[-1] != d:
             digits2 += d
         
-    # 4. remove all "9"s
+    # 4. remove all "9"s                                                    # 18.6: replace regex with a simple loop. this is faster!
     digits3 = ''
     for d in digits2:
         if d != '9':

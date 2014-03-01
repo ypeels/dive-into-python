@@ -38,7 +38,7 @@ def soundex(source):
         
     # 4. remove all "9"s
     # 5. pad end with "0"s to 4 characters
-    return (digits2.replace('9', '') + '000')[:4]
+    return (digits2.replace('9', '') + '000')[:4]                               # 18.6: changed from (slow) regex and second step to append '000'
     
     # my list-based version, significantly slower                               # hey, soundex3b, 3c.py try list-based solutions too!
     #digitList = [digits[0]]

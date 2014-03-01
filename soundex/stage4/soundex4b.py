@@ -36,7 +36,7 @@ def soundex(source):
         if digits2[-1] != d:
             digits2 += d
         
-    # 4. remove all "9"s
+    # 4. remove all "9"s                                                    # 18.6: replace simple loop with str.replace() - faster for MOST cases
     digits3 = digits2.replace('9', '')
     
     # 5. pad end with "0"s to 4 characters

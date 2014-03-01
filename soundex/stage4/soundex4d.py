@@ -38,8 +38,8 @@ def soundex(source):
         
     # 4. remove all "9"s
     # 5. pad end with "0"s to 4 characters
-    return (digits2.replace('9', '') + '000')[:4]
-
+    return (digits2.replace('9', '') + '000')[:4]                               # 18.6: combined 2 steps into single line for minor speedup in most cases. 
+                                                                                # "significantly less readable, and for not much performance gain"
 if __name__ == '__main__':
     from timeit import Timer
     names = ('Woo', 'Pilgrim', 'Flingjingwaller')

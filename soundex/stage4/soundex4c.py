@@ -40,7 +40,7 @@ def soundex(source):
     digits3 = digits2.replace('9', '')
     
     # 5. pad end with "0"s to 4 characters
-    digits3 += '000'
+    digits3 += '000'                                                        # 18.6: removed unnecessary while loop for significant speedup (eat the extra appending in cases when the string is already long enough)
     
     # 6. return first 4 characters
     return digits3[:4]
